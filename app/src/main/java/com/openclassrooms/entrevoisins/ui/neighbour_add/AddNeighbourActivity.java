@@ -1,4 +1,4 @@
-package com.openclassrooms.entrevoisins.ui.neighbour_list;
+package com.openclassrooms.entrevoisins.ui.neighbour_add;
 
 import android.content.Intent;
 import android.support.design.button.MaterialButton;
@@ -27,14 +27,22 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     @BindView(R.id.avatar)
     ImageView avatar;
+
     @BindView(R.id.nameLyt)
     TextInputLayout nameInput;
+
     @BindView(R.id.phoneNumberLyt)
     TextInputLayout phoneInput;
+
     @BindView(R.id.addressLyt)
     TextInputLayout addressInput;
+
+    @BindView(R.id.webSiteLyt)
+    TextInputLayout webSiteInput;
+
     @BindView(R.id.aboutMeLyt)
     TextInputLayout aboutMeInput;
+
     @BindView(R.id.create)
     MaterialButton addButton;
 
@@ -81,13 +89,16 @@ public class AddNeighbourActivity extends AppCompatActivity {
 
     @OnClick(R.id.create)
     void addNeighbour() {
+        // add a new Neighbour object with false as favorite Item
         Neighbour neighbour = new Neighbour(
                 System.currentTimeMillis(),
                 nameInput.getEditText().getText().toString(),
                 mNeighbourImage,
                 addressInput.getEditText().getText().toString(),
                 phoneInput.getEditText().getText().toString(),
-                aboutMeInput.getEditText().getText().toString()
+                webSiteInput.getEditText().getText().toString(),
+                aboutMeInput.getEditText().getText().toString(),
+                false
         );
         mApiService.createNeighbour(neighbour);
         finish();

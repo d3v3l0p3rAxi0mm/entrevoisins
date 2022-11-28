@@ -22,23 +22,36 @@ public class Neighbour {
     /** Phone number */
     private String phoneNumber;
 
+    /** WebSite */
+    private String webSite;
+
     /** About me */
     private String aboutMe;
+
+    /** Favorite */
+    private boolean isFavorite;
 
     /**
      * Constructor
      * @param id
      * @param name
      * @param avatarUrl
+     * @param address
+     * @param phoneNumber
+     * @param webSite
+     * @param aboutMe
+     * @param isFavorite
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
-                     String phoneNumber, String aboutMe) {
+                     String phoneNumber, String webSite, String aboutMe, boolean isFavorite) {
         this.id = id;
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.webSite = webSite;
         this.aboutMe = aboutMe;
+        this.isFavorite = isFavorite;
     }
 
     public long getId() {
@@ -81,6 +94,10 @@ public class Neighbour {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getWebSite() { return webSite; }
+
+    public void setWebSite(String webSite) { this.webSite = webSite; }
+
     public String getAboutMe() {
         return aboutMe;
     }
@@ -88,6 +105,10 @@ public class Neighbour {
     public void setAboutMe(String aboutMe) {
         this.aboutMe = aboutMe;
     }
+
+    public boolean getIsFavorite() { return isFavorite; }
+
+    public void setIsFavorite(boolean isFavorite) { this.isFavorite = isFavorite; }
 
     @Override
     public boolean equals(Object o) {
