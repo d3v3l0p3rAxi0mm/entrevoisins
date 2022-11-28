@@ -21,6 +21,16 @@ Entrevoisins is an Android Studio project developed in Java to Phone and Tablet 
 
 How to compile the project ?
 
+You need to have Android Studio 2020 3.1 or newer to compile and generate a signed APK file.
+Click on "Build" menu bar and select "Generate Signed Bundle / APK..."
+Select APK, Then click on Next.
+Choose module called entrevoisins.app
+Select a path and name for the Key
+Add a password for your Key then Click Next
+Choose Debug to generate the APK file. 
+
+
 ## Execution
 
-How to execute the project ?
+After [Compilation](#compilation) of the app, send the APK File on your smartphone and click on it to install and execute it.
+
