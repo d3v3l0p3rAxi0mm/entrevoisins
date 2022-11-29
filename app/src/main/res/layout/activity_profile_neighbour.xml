@@ -9,6 +9,7 @@
     tools:context=".ui.neighbour_profile.ProfileNeighbourActivity">
 
     <FrameLayout
+        android:id="@+id/frameLayoutNeighbourProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ui.neighbour_profile.ProfileNeighbourActivity">
