@@ -77,13 +77,13 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
                 String toastMessage;
                 if (mNeighbourIsFavorite) {
                     mNeighbourIsFavorite = false;
-                    toastMessage = mNeighbour.getName() + getResources().getString(R.string.removedFromFavorite);
+                    toastMessage = mNeighbour.getName() + " " + getResources().getString(R.string.removedFromFavorite);
                     mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
                     mApiService.deleteFavoriteNeighbour(mNeighbour);
 
                 } else {
                     mNeighbourIsFavorite = true;
-                    toastMessage = mNeighbour.getName() + getResources().getString(R.string.addIntoFavorite);
+                    toastMessage = mNeighbour.getName() + " " +  getResources().getString(R.string.addIntoFavorite);
                     mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
                     mApiService.addFavoriteNeighbour(mNeighbour);
 

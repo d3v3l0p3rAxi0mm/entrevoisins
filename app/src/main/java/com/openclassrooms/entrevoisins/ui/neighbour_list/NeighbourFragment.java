@@ -27,7 +27,6 @@ public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
-    private List<Neighbour> mFavoriteNeighbours;
     private RecyclerView mRecyclerView;
     private boolean mDisplayFavoriteList = true;
 
@@ -80,8 +79,8 @@ public class NeighbourFragment extends Fragment {
 
         if (mDisplayFavoriteList) {
             // if the position of ViewAdapter is 1, app displays favorite List
-            mFavoriteNeighbours = mApiService.getFavoriteNeighbours();
-            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavoriteNeighbours, mDisplayFavoriteList));
+            mNeighbours = mApiService.getFavoriteNeighbours();
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, mDisplayFavoriteList));
         } else {
             // else, app displays favorite List
             mNeighbours = mApiService.getNeighbours();
