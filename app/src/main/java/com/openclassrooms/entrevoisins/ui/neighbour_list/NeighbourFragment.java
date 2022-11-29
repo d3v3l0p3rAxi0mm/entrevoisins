@@ -33,8 +33,6 @@ public class NeighbourFragment extends Fragment {
     // Create keys for Bundle
     private static final String KEY_DISPLAY_FAVORITE_LIST="KEY_DISPLAY_FAVORITE_LIST";
 
-
-
     public NeighbourFragment() {
         // Required empty public constructor
     }
