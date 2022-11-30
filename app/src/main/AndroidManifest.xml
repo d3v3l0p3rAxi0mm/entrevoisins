@@ -20,7 +20,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.openclassrooms.entrevoisins.ui.neighbour_add.AddNeighbourActivity"
+            android:name="com.openclassrooms.entrevoisins.neighbour_list.neighbour_add.AddNeighbourActivity"
             android:label="@string/activity_new_neighbour" />
         <activity
             android:name="com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity"

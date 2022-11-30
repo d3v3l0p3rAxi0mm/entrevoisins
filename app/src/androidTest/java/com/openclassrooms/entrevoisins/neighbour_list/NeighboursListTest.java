@@ -81,7 +81,7 @@ public class NeighboursListTest {
     }
 
     /**
-     * When we click on favorite Tab, list must display only favorite Neighbour
+     * When we go on favorite page, list must display only favorite Neighbour
      */
     @Test
     public void myFavoriteNeighboursList_shouldDisplayOnlyFavoriteNeighbour() throws InterruptedException {
