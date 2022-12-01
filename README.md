@@ -4,14 +4,15 @@ Social local network to share with your neighbours.
 
 ## Table of Contents
 1. [General Info](#general-info)
-2. [Compilation](#compilation)
-3. [Execution](#execution)
+2. [Screenshots](#screenshots)
+3. [Compilation](#compilation)
+4. [Execution](#execution)
 
 ## General Info
 
 Entrevoisins is an Android Studio project developed in Java to Phone and Tablet Supports.
 
-### Screenshot
+## Screenshots
 ![Image text](/app/src/main/res/drawable/screenshot1.png)
 ![Image text](/app/src/main/res/drawable/screenshot2.png)
 ![Image text](/app/src/main/res/drawable/screenshot3.png)
