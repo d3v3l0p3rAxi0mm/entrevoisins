@@ -33,7 +33,7 @@ import static java.lang.Thread.sleep;
  * Test class for list of neighbours
  */
 @RunWith(AndroidJUnit4.class)
-public class NeighbourProfileTest {
+public class NeighbourProfileInstrumentedTest {
 
     // This is fixed
     private static int ITEMS_COUNT = 12;
@@ -52,23 +52,40 @@ public class NeighbourProfileTest {
 
 
     /**
-     * When we click an avatar of a neighbour, The Activity of profile must be launched
+     * Test in GENERAL List
+     * When we click an AVATAR of a neighbour, The ACTIVITY of profile must be LAUNCHED
      */
     @Test
-    public void myClickOnANeighbourInTheList_shouldLaunchProfileNeighbourActivity() {
-        // Click on the second element of the list of neighbours
+    public void ClickOnAvatarNeighbourInGeneralList_shouldLaunchProfileNeighbourActivity() {
+        // Click on the avatar of second element in the list of neighbours
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new LaunchProfileNeighbourActivityByClickOnAvatar()));
-        // Then : Layout of Profile Activity must be displayed
+        // Then : Layout with Id "frameLayoutNeighbourProfile" of Profile Activity must be displayed
         onView(withId(R.id.frameLayoutNeighbourProfile))
                 .check(matches(isDisplayed()));
     }
 
     /**
-     * When we click on the Avatar of a neighbour, his/her name must be displayed
+     * Test in GENERAL List
+     * When we click an NAME of a neighbour, The ACTIVITY of profile must be LAUNCHED
      */
     @Test
-    public void myClickOnTheAvatarOfNeighbourInTheList_shouldDisplayProfileNeighbourActivityWithHisName() {
+    public void ClickOnNameNeighbourInGeneralList_shouldLaunchProfileNeighbourActivity() {
+        // Click on the name of second element in the list of neighbours
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new LaunchProfileNeighbourActivityByClickOnName()));
+        // Then : Layout with Id "frameLayoutNeighbourProfile" of Profile Activity must be displayed
+        onView(withId(R.id.frameLayoutNeighbourProfile))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test in GENERAL List
+     * When we click on the AVATAR of a neighbour, his/her NAME must be DISPLAYED
+     */
+    @Test
+    public void ClickOnAvatarOfNeighbourInGeneralList_shouldDisplayProfileNeighbourActivityWithNeighbourName() {
+        // Click on the avatar of second element in the list of neighbours
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new LaunchProfileNeighbourActivityByClickOnAvatar()));
         // Then : Name in TextView must be displayed
@@ -76,11 +93,13 @@ public class NeighbourProfileTest {
                 .check(matches(withText("Jack")));
     }
 
-    /**
-     * When we click on the name of a neighbour, his/her name must be displayed
+    /*
+     * Test in GENERAL List
+     * When we click on the NAME of a neighbour, his/her NAME must be DISPLAYED
      */
     @Test
-    public void myClickOnTheNameOfNeighbourInTheList_shouldDisplayProfileNeighbourActivityWithHisName() {
+    public void ClickOnNameOfNeighbourInGeneralList_shouldDisplayProfileNeighbourActivityWithNeighbourName() {
+        // Click on the avatar of second element in the list of neighbours
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new LaunchProfileNeighbourActivityByClickOnName()));
         // Then : Name in TextView must be displayed
@@ -88,50 +107,72 @@ public class NeighbourProfileTest {
                 .check(matches(withText("Jack")));
     }
 
+
+
     /**
-     * When we click an avatar of a neighbour in Favorite, The Activity of profile must be launched
+     * Test in FAVORITE List
+     * When we click an AVATAR of a neighbour in Favorite, The ACTIVITY of profile must be LAUNCHED
      */
     @Test
-    public void myClickOnANeighbourInTheFavoriteList_shouldLaunchProfileNeighbourActivity() {
+    public void ClickOnAvatarNeighbourInFavoriteList_shouldLaunchProfileNeighbourActivity() {
         // We swipe the view pager to go to the favorite list
         onView(ViewMatchers.withId(R.id.container))
                 .perform(ViewPagerActions.scrollRight(true));
         // Click on the only element of the list of Favorite neighbours
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, new LaunchProfileNeighbourActivityByClickOnAvatar()));
-        // Then : Layout of Profile Activity must be displayed
+        // Then : Layout with Id "frameLayoutNeighbourProfile" of Profile Activity must be displayed
         onView(withId(R.id.frameLayoutNeighbourProfile))
                 .check(matches(isDisplayed()));
     }
 
     /**
-     * When we click on Avatar of a neighbour in the favorite List, his/her name must be displayed
+     * Test in FAVORITE List
+     * When we click an NAME of a neighbour in Favorite, The ACTIVITY of profile must be LAUNCHED
      */
     @Test
-    public void myClickOnTheAvatarOfNeighbourInTheFavoriteList_shouldDisplayProfileNeighbourActivityWithHisName() {
+    public void ClickOnNameNeighbourInFavoriteList_shouldLaunchProfileNeighbourActivity() {
+        // We swipe the view pager to go to the favorite list
+        onView(ViewMatchers.withId(R.id.container))
+                .perform(ViewPagerActions.scrollRight(true));
+        // Click on the only element of the list of Favorite neighbours
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new LaunchProfileNeighbourActivityByClickOnName()));
+        // Then : Layout with Id "frameLayoutNeighbourProfile" of Profile Activity must be displayed
+        onView(withId(R.id.frameLayoutNeighbourProfile))
+                .check(matches(isDisplayed()));
+    }
+
+    /**
+     * Test in FAVORITE List
+     * When we click on AVATAR of a neighbour in the FAVORITE List, his/her NAME must be DISPLAYED
+     */
+    @Test
+    public void ClickOnAvatarNeighbourInFavoriteList_shouldDisplayProfileNeighbourActivityWithNeighbourName() {
         // We swipe the view pager to go to the favorite list
         onView(ViewMatchers.withId(R.id.container))
                 .perform(ViewPagerActions.scrollRight(true));
         // click on the first neighbour
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, new LaunchProfileNeighbourActivityByClickOnAvatar()));
-        // Then : Name in TextView must be displayed
+        // Then : Name "Laetitia" in TextView must be displayed
         onView(withId(R.id.item_profile_name))
                 .check(matches(withText("Laetitia")));
     }
 
     /**
-     * When we click on name of a neighbour in the favorite List, his/her name must be displayed
+     * Test in FAVORITE List
+     * When we click on NAME of a neighbour in the FAVORITE List, his/her NAME must be DISPLAYED
      */
     @Test
-    public void myClickOnTheNameOfNeighbourInTheFavoriteList_shouldDisplayProfileNeighbourActivityWithHisName() {
+    public void ClickOnNameNeighbourInFavoriteList_shouldDisplayProfileNeighbourActivityWithNeighbourName() {
         // We swipe the view pager to go to the favorite list
         onView(ViewMatchers.withId(R.id.container))
                 .perform(ViewPagerActions.scrollRight(true));
         // click on the first neighbour
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(0, new LaunchProfileNeighbourActivityByClickOnName()));
-        // Then : Name in TextView must be displayed
+        // Then : Name "Laetitia" in TextView must be displayed
         onView(withId(R.id.item_profile_name))
                 .check(matches(withText("Laetitia")));
     }
