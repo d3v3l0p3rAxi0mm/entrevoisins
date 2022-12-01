@@ -10,7 +10,6 @@ import android.support.test.runner.AndroidJUnit4;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
-import com.openclassrooms.entrevoisins.utils.LaunchProfileNeighbourActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -62,50 +61,60 @@ public class NeighboursListTest {
     }
 
     /**
-     * When we delete an item, the item is no more shown
+     * We ensure that our Favorite recyclerview is displaying one item
      */
     @Test
-    public void myNeighboursList_deleteAction_shouldRemoveItem() throws InterruptedException {
-        sleep(100);
-        // Given : We remove the element at position 2
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(ITEMS_COUNT));
+    public void myFavoriteNeighboursList_shouldHaveOneElement() {
+        // swipe to the favorite List
+        onView(ViewMatchers.withId(R.id.container))
+                .perform(ViewPagerActions.scrollRight(true));
+        // verify that list of favorite neighbours has only 1 element
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .check(withItemCount(ITEMS_FAVORITE_COUNT));
+    }
+
+    /**
+     * When we delete an item on the list of Neighbours, the item is no more shown
+     */
+    @Test
+    public void myNeighboursList_deleteAction_shouldRemoveItem() {
+        // verify that list of neighbours has 12 elements
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
-        sleep(100);
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        sleep(100);
-        // Then : the number of element is 11
+        // Then : the number of element must be 11
         onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
                 .check(withItemCount(ITEMS_COUNT-1));
-        sleep(100);
+    }
+
+    /**
+     * When we delete an item on the list of Neighbours, the item is no more shown
+     */
+    @Test
+    public void myFavoriteNeighboursList_deleteAction_shouldRemoveItem() {
+        // We swipe the view pager to go to the favorite list
+        onView(ViewMatchers.withId(R.id.container))
+                .perform(ViewPagerActions.scrollRight(true));
+        // When perform a click on a delete icon
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
+        // Then : the number of element is 0
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .check(withItemCount(ITEMS_FAVORITE_COUNT-1));
     }
 
     /**
      * When we go on favorite page, list must display only favorite Neighbour
      */
     @Test
-    public void myFavoriteNeighboursList_shouldDisplayOnlyFavoriteNeighbour() throws InterruptedException {
-        // We Click on favorite Tab
-        sleep(100);
-        onView(ViewMatchers.withId(R.id.container)).perform(ViewPagerActions.scrollRight(true));
-        sleep(100);
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(ITEMS_FAVORITE_COUNT));
-
-        // Optionals tests
-        sleep(100);
-        onView(ViewMatchers.withId(R.id.container)).perform(ViewPagerActions.scrollLeft(true));
-        sleep(100);
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1, new LaunchProfileNeighbourActivity()));
-        sleep(100);
-        onView(ViewMatchers.withId(R.id.fav_neighbour)).perform(click());
-        sleep(100);
-        onView(ViewMatchers.withId(R.id.back)).perform(click());
-        sleep(100);
-        onView(ViewMatchers.withId(R.id.container)).perform(ViewPagerActions.scrollRight(true));
-        sleep(100);
-        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed())).check(withItemCount(ITEMS_FAVORITE_COUNT + 1));
-        sleep(100);
-
+    public void myFavoriteNeighboursList_shouldDisplayOnlyFavoriteNeighbour() {
+        // We swipe the view pager to go to the favorite list
+        onView(ViewMatchers.withId(R.id.container))
+                .perform(ViewPagerActions.scrollRight(true));
+        onView(allOf(ViewMatchers.withId(R.id.list_neighbours), isDisplayed()))
+                .check(withItemCount(ITEMS_FAVORITE_COUNT));
     }
 
 

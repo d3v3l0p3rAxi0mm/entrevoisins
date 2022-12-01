@@ -8,7 +8,7 @@ import com.openclassrooms.entrevoisins.R;
 
 import org.hamcrest.Matcher;
 
-public class LaunchProfileNeighbourActivity implements ViewAction  {
+public class LaunchProfileNeighbourActivityByClickOnAvatar implements ViewAction  {
     @Override
     public Matcher<View> getConstraints() {
         return null;
