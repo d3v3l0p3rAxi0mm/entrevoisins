@@ -5,9 +5,7 @@ Social local network to share with your neighbours.
 ## Table of Contents
 1. [General Info](#general-info)
 2. [Compilation](#compilation)
-2.1. [Simple compilation](#compilation)
-2.2. [Compilation to have an signed APK](#compilation)
-5. [Execution](#execution)
+3. [Execution](#execution)
 
 ## General Info
 
@@ -25,11 +23,11 @@ Before compilation or Execution, you have to download the project on GitHub on h
 
 How to compile the project ?
 
-###Simple compilation
+### Simple compilation
 
 In Android Studio, Go in Build menu, then click on Make Project (CTRL + F9)
 
-###Compilation to have an signed APK
+### Compilation to have an signed APK
 
 You need to have Android Studio 2020 3.1 or newer to compile and generate a signed APK file.
 Click on "Build" menu bar and select "Generate Signed Bundle / APK..."
