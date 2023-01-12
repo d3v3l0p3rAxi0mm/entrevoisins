@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Dummy mock for the Api
  */
-public class DummyNeighbourApiService implements  NeighbourApiService {
+public class DummyNeighbourApiService implements NeighbourApiService {
 
-    private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
+    private final List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
     /**
      * {@inheritDoc}
@@ -23,7 +23,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
     /**
      * {@inheritDoc}
      */
-    //@Override
+    @Override
     public List<Neighbour> getFavoriteNeighbours() {
         List<Neighbour> favoriteNeighbours = new ArrayList<>();
         for (Neighbour neighbour: neighbours) {
@@ -47,22 +47,21 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
      */
     @Override
     public void deleteFavoriteNeighbour(Neighbour neighbour) {
-        // Create new Neighbour with favorite Status at "false"
-        Neighbour updatedNeighbour = neighbour;
-        updatedNeighbour.setIsFavorite(false);
+        int neighbourIndex = neighbours.indexOf(neighbour);
+        neighbour.setIsFavorite(false);
         // Update the list of neighbours with this new item
-        neighbours.set(neighbours.indexOf(neighbour), updatedNeighbour);
+        neighbours.set(neighbourIndex, neighbour);
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public void addFavoriteNeighbour(Neighbour neighbour) {
-        // Create new Neighbour with favorite Status at "true"
-        Neighbour updatedNeighbour = neighbour;
-        updatedNeighbour.setIsFavorite(true);
+        int neighbourIndex = neighbours.indexOf(neighbour);
+        neighbour.setIsFavorite(true);
         // Update the list of neighbours with this new item
-        neighbours.set(neighbours.indexOf(neighbour), updatedNeighbour);
+        neighbours.set(neighbourIndex, neighbour);
     }
 
     /**

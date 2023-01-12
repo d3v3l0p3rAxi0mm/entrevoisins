@@ -107,7 +107,7 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Fired if the user clicks on a delete button
-     * @param event
+     * @param event Event detecting "delete Neighbour"
      */
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
@@ -117,7 +117,7 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Fired from favorite List only if the user clicks on a delete button
-     * @param event
+     * @param event Event detecting "delete Neighbour From Favorite"
      */
     @Subscribe
     public void onDeleteFavoriteNeighbour(DeleteFavoriteNeighbourEvent event) {

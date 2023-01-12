@@ -3,7 +3,6 @@ package com.openclassrooms.entrevoisins.ui.neighbour_profile;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +53,7 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
 
         // reBuild Neighbour from Extras of Intent
         Bundle extras = getIntent().getExtras();
+        assert extras != null;
         mNeighbour = buildNeighbourFromGetExtra(extras);
         mNeighbourNameOnPic.setText(mNeighbour.getName());
         mNeighbourName.setText(mNeighbour.getName());
@@ -71,38 +71,30 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
             mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
         }
 
-        mFavoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String toastMessage;
-                if (mNeighbourIsFavorite) {
-                    mNeighbourIsFavorite = false;
-                    toastMessage = mNeighbour.getName() + " " + getResources().getString(R.string.removedFromFavorite);
-                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
-                    mApiService.deleteFavoriteNeighbour(mNeighbour);
+        mFavoriteButton.setOnClickListener(v -> {
+            String toastMessage;
+            if (mNeighbourIsFavorite) {
+                mNeighbourIsFavorite = false;
+                toastMessage = mNeighbour.getName() + " " + getResources().getString(R.string.removedFromFavorite);
+                mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_border_24);
+                mApiService.deleteFavoriteNeighbour(mNeighbour);
 
-                } else {
-                    mNeighbourIsFavorite = true;
-                    toastMessage = mNeighbour.getName() + " " +  getResources().getString(R.string.addIntoFavorite);
-                    mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
-                    mApiService.addFavoriteNeighbour(mNeighbour);
+            } else {
+                mNeighbourIsFavorite = true;
+                toastMessage = mNeighbour.getName() + " " +  getResources().getString(R.string.addIntoFavorite);
+                mFavoriteButton.setImageResource(R.drawable.ic_baseline_star_24);
+                mApiService.addFavoriteNeighbour(mNeighbour);
 
-                }
-                Toast.makeText(v.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
             }
+            Toast.makeText(v.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProfileNeighbourActivity.this.finish();
-            }
-        });
+        backButton.setOnClickListener(v -> ProfileNeighbourActivity.this.finish());
 
     }
 
     private Neighbour buildNeighbourFromGetExtra(Bundle extras) {
-        Neighbour neighbour = new Neighbour(
+        return new Neighbour(
                 extras.getLong("neighbourId"),
                 extras.getString("neighbourName"),
                 extras.getString("neighbourAvatarUrl"),
@@ -112,7 +104,6 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
                 extras.getString("neighbourAboutMe"),
                 extras.getBoolean("neighbourIsFavorite")
         );
-        return neighbour;
     }
 
 }

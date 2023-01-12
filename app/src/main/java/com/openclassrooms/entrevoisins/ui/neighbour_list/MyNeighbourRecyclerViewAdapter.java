@@ -1,6 +1,7 @@
 package com.openclassrooms.entrevoisins.ui.neighbour_list;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
-import com.openclassrooms.entrevoisins.events.ProfileNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.ui.neighbour_profile.ProfileNeighbourActivity;
 
@@ -35,6 +35,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         mNeighbours = items;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_neighbour, parent, false);
@@ -50,33 +51,24 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mDisplayFavoriteList) {
-                    EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
-                } else {
-                    EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-                }
+        holder.mDeleteButton.setOnClickListener(v -> {
+            if (mDisplayFavoriteList) {
+                EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
+            } else {
+                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
             }
         });
 
-        holder.mNeighbourName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentNameClick = new Intent(holder.mNeighbourName.getContext(), ProfileNeighbourActivity.class);
-                putExtraAllNeighbourFieldsInIntent(intentNameClick, neighbour);
-                holder.mNeighbourName.getContext().startActivity(intentNameClick);
-            }
+        holder.mNeighbourName.setOnClickListener(v -> {
+            Intent intentNameClick = new Intent(holder.mNeighbourName.getContext(), ProfileNeighbourActivity.class);
+            putExtraAllNeighbourFieldsInIntent(intentNameClick, neighbour);
+            holder.mNeighbourName.getContext().startActivity(intentNameClick);
         });
 
-        holder.mNeighbourAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentAvatarClick = new Intent(holder.mNeighbourAvatar.getContext(), ProfileNeighbourActivity.class);
-                putExtraAllNeighbourFieldsInIntent(intentAvatarClick, neighbour);
-                holder.mNeighbourAvatar.getContext().startActivity(intentAvatarClick);
-            }
+        holder.mNeighbourAvatar.setOnClickListener(v -> {
+            Intent intentAvatarClick = new Intent(holder.mNeighbourAvatar.getContext(), ProfileNeighbourActivity.class);
+            putExtraAllNeighbourFieldsInIntent(intentAvatarClick, neighbour);
+            holder.mNeighbourAvatar.getContext().startActivity(intentAvatarClick);
         });
 
 
@@ -100,7 +92,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         return mNeighbours.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_list_avatar)
         public ImageView mNeighbourAvatar;
         @BindView(R.id.item_list_name)

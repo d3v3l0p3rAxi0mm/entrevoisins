@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class DummyNeighbourGenerator {
 
-    public static List<Neighbour> DUMMY_NEIGHBOURS = Arrays.asList(
+    private final static List<Neighbour> DUMMY_NEIGHBOURS = Arrays.asList(
             new Neighbour(1, "Caroline", "https://i.pravatar.cc/300?u=a042581f4e29026704d", "75000 Paris",
                     "+33 6 15 59 89 10", "https://facebook.fr/caroline", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla scelerisque leo vitae suscipit volutpat. Quisque pretium eget dui quis volutpat. Cras consectetur iaculis sapien vitae ultrices. Nullam sollicitudin enim ante, id pharetra metus gravida nec. Nunc at libero nec nulla pellentesque aliquet. Suspendisse potenti.", false),
             new Neighbour(2, "Jack", "https://i.pravatar.cc/300?u=a042581f4e29026704e", "33000 Bordeaux",
@@ -35,9 +35,14 @@ public abstract class DummyNeighbourGenerator {
                     "+33 6 19 23 54 27", "https://facebook.fr/ludovic", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla scelerisque leo vitae suscipit volutpat. Quisque pretium eget dui quis volutpat. Cras consectetur iaculis sapien vitae ultrices. Nullam sollicitudin enim ante, id pharetra metus gravida nec. Nunc at libero nec nulla pellentesque aliquet. Suspendisse potenti. Ut hendrerit sagittis porttitor.", false)
     );
 
-    static List<Neighbour> generateNeighbours() {
-        return new ArrayList<>(DUMMY_NEIGHBOURS);
+    public static List<Neighbour> generateNeighbours() {
+        List<Neighbour> dummyNeighbours = new ArrayList<>();
+        for (Neighbour neighbour: DUMMY_NEIGHBOURS) {
+            dummyNeighbours.add(new Neighbour(neighbour));
+        }
+        return dummyNeighbours;
     }
+
 
 
 }

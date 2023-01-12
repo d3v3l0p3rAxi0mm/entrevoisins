@@ -14,33 +14,33 @@ public class Neighbour {
     private String name;
 
     /** Avatar */
-    private String avatarUrl;
+    private final String avatarUrl;
 
     /** Adress */
-    private String address;
+    private final String address;
 
     /** Phone number */
-    private String phoneNumber;
+    private final String phoneNumber;
 
     /** WebSite */
-    private String webSite;
+    private final String webSite;
 
     /** About me */
-    private String aboutMe;
+    private final String aboutMe;
 
     /** Favorite */
     private boolean isFavorite;
 
     /**
      * Constructor
-     * @param id
-     * @param name
-     * @param avatarUrl
-     * @param address
-     * @param phoneNumber
-     * @param webSite
-     * @param aboutMe
-     * @param isFavorite
+     * @param id id of Neighbour
+     * @param name name of Neighbour
+     * @param avatarUrl URL of Avatar Neighbour
+     * @param address Postal Address of Neighbour
+     * @param phoneNumber Phone Number of Neighbour
+     * @param webSite of Neighbour
+     * @param aboutMe Text which presents neighbour's History
+     * @param isFavorite Boolean which place the Neighbour as Favorite or not
      */
     public Neighbour(long id, String name, String avatarUrl, String address,
                      String phoneNumber, String webSite, String aboutMe, boolean isFavorite) {
@@ -53,6 +53,19 @@ public class Neighbour {
         this.aboutMe = aboutMe;
         this.isFavorite = isFavorite;
     }
+
+    // Constructeur de recopie
+    public Neighbour(Neighbour neighbour) {
+        this.id = neighbour.getId();
+        this.name = neighbour.getName();
+        this.avatarUrl = neighbour.getAvatarUrl();
+        this.address = neighbour.getAddress();
+        this.phoneNumber = neighbour.getPhoneNumber();
+        this.webSite = neighbour.getWebSite();
+        this.aboutMe = neighbour.getAboutMe();
+        this.isFavorite = neighbour.getIsFavorite();
+    }
+
 
     public long getId() {
         return id;
@@ -74,36 +87,18 @@ public class Neighbour {
         return avatarUrl;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getWebSite() { return webSite; }
-
-    public void setWebSite(String webSite) { this.webSite = webSite; }
 
     public String getAboutMe() {
         return aboutMe;
-    }
-
-    public void setAboutMe(String aboutMe) {
-        this.aboutMe = aboutMe;
     }
 
     public boolean getIsFavorite() { return isFavorite; }

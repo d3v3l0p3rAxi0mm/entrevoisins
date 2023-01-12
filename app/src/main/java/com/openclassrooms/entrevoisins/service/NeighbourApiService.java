@@ -11,38 +11,36 @@ import java.util.List;
 public interface NeighbourApiService {
 
     /**
-     * Get all my Neighbours
-     * @return {@link List}
+     * @return all my Neighbours {@link List}
      */
     List<Neighbour> getNeighbours();
 
     /**
-     * Get Favorite Neighbours
-     * @return {@link List}
+     * @return Favorite Neighbours {@link List}
      */
     List<Neighbour> getFavoriteNeighbours();
 
     /**
      * Deletes a neighbour
-     * @param neighbour
+     * @param neighbour Neighbour to delete
      */
     void deleteNeighbour(Neighbour neighbour);
 
     /**
-     * Deletes a neighbour
-     * @param neighbour
+     * Deletes a neighbour from favorite List
+     * @param neighbour neighbour to delete from favorite List
      */
     void deleteFavoriteNeighbour(Neighbour neighbour);
 
     /**
      * add a neighbour in the Favorite List
-     * @param neighbour
+     * @param neighbour Neighbour to add in favorite
      */
     void addFavoriteNeighbour(Neighbour neighbour);
 
     /**
      * Create a neighbour
-     * @param neighbour
+     * @param neighbour Neighbour to create
      */
     void createNeighbour(Neighbour neighbour);
 }

@@ -6,13 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:scrollbars="vertical"
-    tools:context=".neighbour_list.neighbour_add.AddNeighbourActivity">
+    tools:context=".ui.neighbour_add.AddNeighbourActivity">
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".neighbour_list.neighbour_add.AddNeighbourActivity">
 
         <LinearLayout
@@ -29,7 +27,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/avatar" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/nameLyt"
@@ -43,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -59,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Phone number"
+                    android:hint="@string/phone_number"
                     android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
 
@@ -75,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Address"
+                    android:hint="@string/address"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
@@ -93,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Website"
+                    android:hint="@string/website"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
@@ -112,7 +111,7 @@
                     android:lines="4"
                     android:minLines="4"
                     android:ems="10"
-                    android:hint="About me"
+                    android:hint="@string/about_me"
                     android:inputType="textMultiLine" />
             </android.support.design.widget.TextInputLayout>
 
@@ -125,7 +124,7 @@
                 android:layout_gravity="center"
                 app:cornerRadius="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Save"/>
+                android:text="@string/save"/>
 
         </LinearLayout>
 
