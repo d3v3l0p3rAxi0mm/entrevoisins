@@ -9,25 +9,18 @@ public class Neighbour {
 
     /** Identifier */
     private long id;
-
     /** Full name */
     private String name;
-
     /** Avatar */
     private final String avatarUrl;
-
     /** Adress */
     private final String address;
-
     /** Phone number */
     private final String phoneNumber;
-
     /** WebSite */
     private final String webSite;
-
     /** About me */
     private final String aboutMe;
-
     /** Favorite */
     private boolean isFavorite;
 

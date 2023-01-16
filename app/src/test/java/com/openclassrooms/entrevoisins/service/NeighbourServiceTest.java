@@ -40,7 +40,7 @@ public class NeighbourServiceTest {
     }
 
     /**
-     * Test getNeighbours() must return DUMMY_NEIGHBOURS
+     * Test getFavoriteNeighbours() must return one element only from DUMMY_NEIGHBOURS
      */
     @Test
     public void getFavoriteNeighboursWithSuccess() {

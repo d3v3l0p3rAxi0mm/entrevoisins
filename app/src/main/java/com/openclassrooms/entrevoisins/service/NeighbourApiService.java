@@ -43,4 +43,15 @@ public interface NeighbourApiService {
      * @param neighbour Neighbour to create
      */
     void createNeighbour(Neighbour neighbour);
+
+    /**
+     * Keep in memory the selected neighbour when click in item of List of Neighbour
+     * @param neighbour Neighbour to create
+     */
+    void setSelectedNeighbour(Neighbour neighbour);
+
+    /**
+     * @return the selected Neighbour {@link Neighbour}
+     */
+    Neighbour getSelectedNeighbour();
 }

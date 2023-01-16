@@ -51,10 +51,7 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
         // Bind all widgets
         ButterKnife.bind(this);
 
-        // reBuild Neighbour from Extras of Intent
-        Bundle extras = getIntent().getExtras();
-        assert extras != null;
-        mNeighbour = buildNeighbourFromGetExtra(extras);
+        mNeighbour = mApiService.getSelectedNeighbour();
         mNeighbourNameOnPic.setText(mNeighbour.getName());
         mNeighbourName.setText(mNeighbour.getName());
         mNeighbourAddress.setText(mNeighbour.getAddress());
@@ -91,19 +88,6 @@ public class ProfileNeighbourActivity extends AppCompatActivity {
 
         backButton.setOnClickListener(v -> ProfileNeighbourActivity.this.finish());
 
-    }
-
-    private Neighbour buildNeighbourFromGetExtra(Bundle extras) {
-        return new Neighbour(
-                extras.getLong("neighbourId"),
-                extras.getString("neighbourName"),
-                extras.getString("neighbourAvatarUrl"),
-                extras.getString("neighbourAddress"),
-                extras.getString("neighbourPhoneNumber"),
-                extras.getString("neighbourWebSite"),
-                extras.getString("neighbourAboutMe"),
-                extras.getBoolean("neighbourIsFavorite")
-        );
     }
 
 }

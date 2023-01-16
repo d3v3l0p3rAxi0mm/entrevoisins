@@ -63,7 +63,6 @@ public class NeighbourFragment extends Fragment {
         Context context = view.getContext();
         // Get data from Bundle (created in method newInstance)
         mDisplayFavoriteList = getArguments().getBoolean(KEY_DISPLAY_FAVORITE_LIST, true);
-
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

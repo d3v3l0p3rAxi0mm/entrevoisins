@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_profile.ProfileNeighbourActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,6 +31,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
     private final boolean mDisplayFavoriteList;
+    private NeighbourApiService mApiService = DI.getNeighbourApiService();;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, boolean displayFavoriteList) {
         mDisplayFavoriteList = displayFavoriteList;
@@ -61,29 +64,16 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
         holder.mNeighbourName.setOnClickListener(v -> {
             Intent intentNameClick = new Intent(holder.mNeighbourName.getContext(), ProfileNeighbourActivity.class);
-            putExtraAllNeighbourFieldsInIntent(intentNameClick, neighbour);
+            mApiService.setSelectedNeighbour(neighbour);
             holder.mNeighbourName.getContext().startActivity(intentNameClick);
         });
 
         holder.mNeighbourAvatar.setOnClickListener(v -> {
             Intent intentAvatarClick = new Intent(holder.mNeighbourAvatar.getContext(), ProfileNeighbourActivity.class);
-            putExtraAllNeighbourFieldsInIntent(intentAvatarClick, neighbour);
+            mApiService.setSelectedNeighbour(neighbour);
             holder.mNeighbourAvatar.getContext().startActivity(intentAvatarClick);
         });
 
-
-    }
-
-
-    private void putExtraAllNeighbourFieldsInIntent(Intent intent, Neighbour neighbour) {
-        intent.putExtra("neighbourId",neighbour.getId());
-        intent.putExtra("neighbourName",neighbour.getName());
-        intent.putExtra("neighbourAvatarUrl",neighbour.getAvatarUrl());
-        intent.putExtra("neighbourAddress",neighbour.getAddress());
-        intent.putExtra("neighbourPhoneNumber",neighbour.getPhoneNumber());
-        intent.putExtra("neighbourWebSite",neighbour.getWebSite());
-        intent.putExtra("neighbourAboutMe",neighbour.getAboutMe());
-        intent.putExtra("neighbourIsFavorite",neighbour.getIsFavorite());
     }
 
 
