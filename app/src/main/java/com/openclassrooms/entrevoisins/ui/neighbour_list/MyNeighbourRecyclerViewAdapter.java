@@ -4,15 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.databinding.FragmentNeighbourBinding;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteFavoriteNeighbourEvent;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
@@ -24,14 +20,10 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
     private final boolean mDisplayFavoriteList;
-    private NeighbourApiService mApiService = DI.getNeighbourApiService();;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, boolean displayFavoriteList) {
         mDisplayFavoriteList = displayFavoriteList;
@@ -41,41 +33,16 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_neighbour, parent, false);
-        return new ViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        FragmentNeighbourBinding fragmentNeighbourBinding = FragmentNeighbourBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(fragmentNeighbourBinding);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Neighbour neighbour = mNeighbours.get(position);
-        holder.mNeighbourName.setText(neighbour.getName());
-        Glide.with(holder.mNeighbourAvatar.getContext())
-                .load(neighbour.getAvatarUrl())
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.mNeighbourAvatar);
-
-        holder.mDeleteButton.setOnClickListener(v -> {
-            if (mDisplayFavoriteList) {
-                EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
-            } else {
-                EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
-            }
-        });
-
-        holder.mNeighbourName.setOnClickListener(v -> {
-            Intent intentNameClick = new Intent(holder.mNeighbourName.getContext(), ProfileNeighbourActivity.class);
-            mApiService.setSelectedNeighbour(neighbour);
-            holder.mNeighbourName.getContext().startActivity(intentNameClick);
-        });
-
-        holder.mNeighbourAvatar.setOnClickListener(v -> {
-            Intent intentAvatarClick = new Intent(holder.mNeighbourAvatar.getContext(), ProfileNeighbourActivity.class);
-            mApiService.setSelectedNeighbour(neighbour);
-            holder.mNeighbourAvatar.getContext().startActivity(intentAvatarClick);
-        });
-
+        holder.bindView(neighbour, mDisplayFavoriteList);
     }
-
 
     @Override
     public int getItemCount() {
@@ -83,16 +50,44 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.item_list_avatar)
-        public ImageView mNeighbourAvatar;
-        @BindView(R.id.item_list_name)
-        public TextView mNeighbourName;
-        @BindView(R.id.item_list_delete_button)
-        public ImageButton mDeleteButton;
 
-        public ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        private final FragmentNeighbourBinding fragmentNeighbourBinding;
+        private final NeighbourApiService mApiService = DI.getNeighbourApiService();
+
+        public ViewHolder(@NonNull FragmentNeighbourBinding fragmentNeighbourBinding) {
+            super(fragmentNeighbourBinding.getRoot());
+            this.fragmentNeighbourBinding = fragmentNeighbourBinding;
         }
+
+        public void bindView(Neighbour neighbour, Boolean displayFavoriteList) {
+            fragmentNeighbourBinding.itemListName.setText(neighbour.getName());
+            Glide.with(fragmentNeighbourBinding.itemListAvatar.getContext())
+                    .load(neighbour.getAvatarUrl())
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(fragmentNeighbourBinding.itemListAvatar);
+
+
+            fragmentNeighbourBinding.itemListDeleteButton.setOnClickListener(v -> {
+                if (displayFavoriteList) {
+                    EventBus.getDefault().post(new DeleteFavoriteNeighbourEvent(neighbour));
+                } else {
+                    EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
+                }
+            });
+
+            fragmentNeighbourBinding.itemListName.setOnClickListener(v -> {
+                Intent intentNameClick = new Intent(fragmentNeighbourBinding.itemListName.getContext(), ProfileNeighbourActivity.class);
+                mApiService.setSelectedNeighbour(neighbour);
+                fragmentNeighbourBinding.itemListName.getContext().startActivity(intentNameClick);
+            });
+
+            fragmentNeighbourBinding.itemListAvatar.setOnClickListener(v -> {
+                Intent intentAvatarClick = new Intent(fragmentNeighbourBinding.itemListAvatar.getContext(), ProfileNeighbourActivity.class);
+                mApiService.setSelectedNeighbour(neighbour);
+                fragmentNeighbourBinding.itemListAvatar.getContext().startActivity(intentAvatarClick);
+            });
+
+        }
+
     }
 }

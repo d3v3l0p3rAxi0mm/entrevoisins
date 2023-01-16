@@ -21,12 +21,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
+import java.util.Objects;
 
 
 public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
-    private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
     private boolean mDisplayFavoriteList = true;
 
@@ -62,10 +62,11 @@ public class NeighbourFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_neighbour_list, container, false);
         Context context = view.getContext();
         // Get data from Bundle (created in method newInstance)
+        assert getArguments() != null;
         mDisplayFavoriteList = getArguments().getBoolean(KEY_DISPLAY_FAVORITE_LIST, true);
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(Objects.requireNonNull(getContext()), DividerItemDecoration.VERTICAL));
         return view;
     }
 
@@ -73,7 +74,7 @@ public class NeighbourFragment extends Fragment {
      * Init the List of neighbours
      */
     private void initList() {
-
+        List<Neighbour> mNeighbours;
         if (mDisplayFavoriteList) {
             // if the position of ViewAdapter is 1, app displays favorite List
             mNeighbours = mApiService.getFavoriteNeighbours();
