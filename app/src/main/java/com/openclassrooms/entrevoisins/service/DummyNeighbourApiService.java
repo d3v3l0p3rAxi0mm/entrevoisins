@@ -2,8 +2,9 @@ package com.openclassrooms.entrevoisins.service;
 
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Dummy mock for the Api
@@ -26,13 +27,8 @@ public class DummyNeighbourApiService implements NeighbourApiService {
      */
     @Override
     public List<Neighbour> getFavoriteNeighbours() {
-        List<Neighbour> favoriteNeighbours = new ArrayList<>();
-        for (Neighbour neighbour: neighbours) {
-            if (neighbour.getIsFavorite()) {
-                favoriteNeighbours.add(neighbour);
-            }
-        }
-        return favoriteNeighbours;
+        Predicate<Neighbour> isFavorite = Neighbour::getIsFavorite;
+        return neighbours.stream().filter(isFavorite).collect(Collectors.toList());
     }
 
     /**
